@@ -90,25 +90,26 @@ public class Food {
 
     /**
      * Adds one to the item count
-     * TODO: extract set scale to a helper
      */
     public void incrementCount() {
         this.count++;
     }
 
     public BigDecimal getUnitCost() {
-        return unitCost.setScale(2, RoundingMode.HALF_EVEN);
+        return unitCost;
     }
 
     /**
      * Returns the total cost of the item, ie. the unit cost times the count
      */
     public BigDecimal getTotalCost() {
-        return unitCost.multiply(BigDecimal.valueOf(count)).setScale(2, RoundingMode.HALF_EVEN);
+        return unitCost.multiply(BigDecimal.valueOf(count));
     }
 
     public void setUnitCost(BigDecimal unitCost) {
         if (BigDecimal.ZERO.compareTo(unitCost) > 0) {
+            // TODO: throw some error
+        } if (unitCost.scale() > 2) {
             // TODO: throw some error
         }
         this.unitCost = unitCost;
